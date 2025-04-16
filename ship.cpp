@@ -1,4 +1,6 @@
 #include "ship.h"
+#include "board.h"
+#include "texture.h"
 
 using namespace std;
 
@@ -29,8 +31,8 @@ bool Ship::checkMouseInShip(int mouseX, int mouseY) {
 }
 
 void Ship::calculateShipRowCol() {
-    int dx = shipCover.x - ownerBoard->getBasePosX;
-    int dy = shipCover.y - ownerBoard->getBasePosY;
+    int dx = shipCover.x - ownerBoard->getBasePosX();
+    int dy = shipCover.y - ownerBoard->getBasePosY();
 
     int cellSpacing = CELL_SIZE + BORDER_SIZE;
 
@@ -40,8 +42,8 @@ void Ship::calculateShipRowCol() {
     if (horizontal) {
         if (startCol < 0)
             startCol = 0;
-        if (startCol + shipWidthInCells > BOARD_COL)
-            startCol = BOARD_COL - shipWidthInCells;
+        if (startCol + shipWidth > BOARD_COL)
+            startCol = BOARD_COL - shipWidth;
         if (startRow < 0)
             startRow = 0;
         if (startRow >= BOARD_ROW)
@@ -49,13 +51,16 @@ void Ship::calculateShipRowCol() {
     } else {
         if (startRow < 0)
             startRow = 0;
-        if (startRow + shipWidthInCells > BOARD_ROW)
-            startRow = BOARD_ROW - shipWidthInCells;
+        if (startRow + shipWidth > BOARD_ROW)
+            startRow = BOARD_ROW - shipWidth;
         if (startCol < 0)
             startCol = 0;
         if (startCol >= BOARD_COL)
             startCol = BOARD_COL - 1;
     }
+
+    shipCover.x = ownerBoard->getBasePosX() + startCol * cellSpacing;
+    shipCover.y = ownerBoard->getBasePosY() + startRow * cellSpacing;
 }
 
 void Ship::sendToTray() {
@@ -67,17 +72,28 @@ void Ship::sendToTray() {
 void Ship::updateShip(SDL_Event e) {
     switch (e.type) {
         case SDL_MOUSEBUTTONDOWN: {
-            if (e.button.button == SDL_BUTTON_LEFT) {
-                if (checkMouseWithin(e.button.x, e.button.y)) {
+            int mouseX = e.button.x, mouseY = e.button.y;
+            
+            if (checkMouseInShip(mouseX, mouseY)) {
+                if (e.button.button == SDL_BUTTON_LEFT) {
                     isDragging = true;
                     offsetX = mouseX - shipCover.x;
                     offsetY = mouseY - shipCover.y;
+                } else if (e.button.button == SDL_BUTTON_RIGHT) {
+                    ownerBoard->removeShip(this);
+                    
+                    horizontal = !horizontal;
+                    swap(shipCover.w, shipCover.h);
+                    
+                    calculateShipRowCol();
+                    
+                    if (ownerBoard->checkValidPlacement(this))
+                            ownerBoard->snapShip(this);
+                    else
+                        sendToTray();
                 }
-            } else if (e.button.button == SDL_BUTTON_RIGHT) {
-                horizontal = !horizontal;
-                swap(shipCover.w, shipCover.h);
             }
-                
+            
             break;
         }
 
@@ -85,8 +101,8 @@ void Ship::updateShip(SDL_Event e) {
             if (isDragging) {
                 int mouseX = e.motion.x, mouseY = e.motion.y;
 
-                if (0 <= mouseX and mouseX <= WINDOW_WIDTH and
-                    0 <= mouseY and mouseY <= WINDOW_HEIGHT) {
+                if (offsetX <= mouseX and mouseX <= WINDOW_WIDTH - (shipCover.w - offsetX) and
+                    offsetY <= mouseY and mouseY <= WINDOW_HEIGHT - (shipCover.h - offsetY)) {
                         shipCover.x = e.motion.x - offsetX;
                         shipCover.y = e.motion.y - offsetY;
                     }

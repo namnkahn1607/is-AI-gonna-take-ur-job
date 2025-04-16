@@ -1,9 +1,7 @@
 #pragma once
 
+#include "constant.h"
 #include "cell.h"
-#include "ship.h"
-
-using namespace std;
 
 class Cell;
 
@@ -11,16 +9,16 @@ class Ship;
 
 class Board {
 private:
-    vector<vector<Cell>> grid;
-    vector<vector<State>> stateMatrix;
+    std::vector<std::vector<Cell>> grid;
+    std::vector<std::vector<State>> stateMatrix;
     SDL_Rect boardCover;
     bool isHidden, playerOrBot;
     SDL_Renderer* boardRenderer;
 
 public:
-    vector<Ship*> shipList;
+    std::vector<Ship*> shipList;
 
-    vector<pair<int, int>> occupiedCells;
+    std::vector<std::pair<int, int>> occupiedCells;
 
     Board(SDL_Point basePos, SDL_Renderer* ren, bool turn);
 
@@ -30,9 +28,9 @@ public:
 
     bool checkValidPlacement(Ship* placingShip);
 
-    void snapShip(Ship* placingShip);
-    
-    void updateBoard();
+    void snapShip(Ship* snappingShip);
+
+    void removeShip(Ship* removingShip);
     
     void renderBoard();
 

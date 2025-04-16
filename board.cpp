@@ -1,4 +1,6 @@
 #include "board.h"
+#include "ship.h"
+#include "cell.h"
 
 using namespace std;
 
@@ -59,7 +61,19 @@ void Board::snapShip(Ship* snappingShip) {
     }
 }
 
-void Board::updateBoard() {}
+void Board::removeShip(Ship* removingShip) {
+    for (int i = 0; i < removingShip->getShipWidth(); ++i) {
+        int row = removingShip->getStartRow() + (removingShip->checkHorizontal() ? 0 : i);
+        int col = removingShip->getStartCol() + (removingShip->checkHorizontal() ? i : 0);
+
+        occupiedCells.erase(
+            remove(occupiedCells.begin(), occupiedCells.end(), make_pair(row, col)),
+            occupiedCells.end()
+        );
+
+        stateMatrix[row][col] = CELL_ALIVE;
+    }
+}
 
 void Board::renderBoard() {
     for (auto &row : grid) {
@@ -77,7 +91,7 @@ void Board::renderBoard() {
                         break;
                 }
             } else {
-                if (playerOrBot and cell.getCellState == CELL_OCCUPIED)
+                if (playerOrBot and cell.getCellState() == CELL_OCCUPIED)
                     FillColor = playerDomainColor;
             }
             
@@ -108,8 +122,8 @@ void Board::renderBoard() {
 
     for (int j = 0; j < BOARD_COL - 1; ++j) {
         SDL_Rect verticalBorder = {
-            boardBaseCoord.x + (j + 1) * CELL_SIZE + j * BORDER_SIZE,
-            boardBaseCoord.y,
+            boardCover.x + (j + 1) * CELL_SIZE + j * BORDER_SIZE,
+            boardCover.y,
             BORDER_SIZE,
             BOARD_ROW * CELL_SIZE + (BOARD_ROW - 1) * BORDER_SIZE
         };

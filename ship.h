@@ -1,10 +1,6 @@
 #pragma once
 
 #include "constant.h"
-#include "cell.h"
-#include "board.h"
-
-using namespace std;
 
 class Board;
 

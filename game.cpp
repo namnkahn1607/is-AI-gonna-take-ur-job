@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Board* playerBoard = nullptr;
+
 Game::Game() {}
 
 Game::~Game() {}
@@ -30,21 +32,18 @@ void Game::init(const char* consoleTitle, int xPos, int yPos,
         isRunning = true;
     } else
         isRunning = false;
+
+    playerBoard = new Board({0, 0}, ren, PLAYER);
 }
 
 void Game::handleEvents() {
     SDL_Event event;
 
-    SDL_PollEvent(&event);
-
-    switch (event.type) {
-        case SDL_QUIT: {
+    while (SDL_PollEvent(&event) != 0) {
+        if (event.type == SDL_QUIT) {
             isRunning = false;
             break;
         }
-
-        default:
-            break;
     }
 }
 
@@ -53,9 +52,14 @@ void Game::update() {
 }
 
 void Game::render() {
+    SDL_SetRenderDrawColor(
+        ren, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a
+    );
+    
     SDL_RenderClear(ren);
 
     /* stuff to render */
+    playerBoard->renderBoard();
 
     SDL_RenderPresent(ren);
 }

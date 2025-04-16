@@ -1,6 +1,7 @@
 #pragma once
 
 #include "constant.h"
+#include "board.h"
 
 class Game {
 private:

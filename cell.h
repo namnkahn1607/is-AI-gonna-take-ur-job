@@ -2,8 +2,6 @@
 
 #include "constant.h"
 
-using namespace std;
-
 class Cell {
 private:
     SDL_Rect cellCover;
