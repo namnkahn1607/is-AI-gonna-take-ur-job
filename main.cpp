@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     newGame->init(
         "is AI gonna take ur job?!",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        WINDOW_WIDTH, WINDOW_HEIGHT, false
+        WINDOW_WIDTH, WINDOW_HEIGHT, NOT_FULLSCREEN
     );
 
     while (newGame->running()) {

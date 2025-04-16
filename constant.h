@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -18,6 +19,12 @@ const int FRAME_DELAY = 1000 / 144;
 
 const int WINDOW_WIDTH = 1080;
 const int WINDOW_HEIGHT = 720;
+
+const bool FULLSCREEN = true;
+const bool NOT_FULLSCREEN = false;
+
+constexpr const char* fontPath = "assets/font/Consolas.ttf";
+const int inGameFontSize = 14;
 
 const SDL_Color playerDomainColor = {194, 232, 255, 255};
 const SDL_Color playerSignatureColor = {10, 173, 255, 255};

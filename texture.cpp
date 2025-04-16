@@ -7,9 +7,7 @@ SDL_Texture* textureManager::loadFromFile(const char* imgPath, SDL_Renderer* ren
     
     if (loadedSur == nullptr) {
         SDL_LogError(
-            SDL_LOG_CATEGORY_VIDEO,
-            "cannot load img onto sur: %s\n",
-            IMG_GetError()
+            SDL_LOG_CATEGORY_VIDEO, "cannot load img onto sur: %s\n", IMG_GetError()
         );
 
         return nullptr;

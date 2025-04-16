@@ -2,6 +2,8 @@
 
 using namespace std;
 
+TTF_Font* inGameFont = nullptr;
+
 Board* playerBoard = nullptr;
 
 Game::Game() {}
@@ -20,7 +22,7 @@ void Game::init(const char* consoleTitle, int xPos, int yPos,
         if (win != nullptr)
             printf("%s\n", "window created!");
         
-        ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+        ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
         if (ren != nullptr)
             printf("%s\n", "renderer created!");
@@ -32,6 +34,24 @@ void Game::init(const char* consoleTitle, int xPos, int yPos,
         isRunning = true;
     } else
         isRunning = false;
+
+    int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
+
+    if (IMG_Init(imgFlags) & imgFlags)
+        printf("%s\n", "IMG subsys inited!");
+    else
+        SDL_LogError(
+            SDL_LOG_CATEGORY_SYSTEM, "error init IMG: %s\n", IMG_GetError()
+        );
+
+    if (TTF_Init() == 0)
+        printf("%s\n", "TTF subsys inited!");
+    else
+        SDL_LogError(
+            SDL_LOG_CATEGORY_SYSTEM, "error init TTF: %s\n", TTF_GetError()
+        );
+
+    inGameFont = TTF_OpenFont(fontPath, inGameFontSize);
 
     playerBoard = new Board({0, 0}, ren, PLAYER);
 }
