@@ -2,7 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h> /* https://wiki.libsdl.org/SDL2_ttf/CategoryAPI */
 #include <iostream>
 #include <algorithm>
 #include <vector>

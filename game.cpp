@@ -85,11 +85,14 @@ void Game::render() {
 }
 
 void Game::close() {
+    TTF_CloseFont(inGameFont);
+    inGameFont = nullptr;
     SDL_DestroyRenderer(ren);
     ren = nullptr;
     SDL_DestroyWindow(win);
     win = nullptr;
     
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 
