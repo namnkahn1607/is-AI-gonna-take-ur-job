@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cell.h"
+#include "ship.h"
 
 using namespace std;
 
@@ -19,11 +20,15 @@ private:
 public:
     vector<Ship*> shipList;
 
+    vector<pair<int, int>> occupiedCells;
+
     Board(SDL_Point basePos, SDL_Renderer* ren, bool turn);
 
     ~Board();
 
     bool checkMouseInBoard(int mouseX, int mouseY);
+
+    bool checkValidPlacement(Ship* placingShip);
     
     void renderBoard();
 

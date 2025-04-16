@@ -28,7 +28,7 @@ bool Ship::checkMouseInShip(int mouseX, int mouseY) {
             shipCover.y <= mouseY and mouseY <= shipCover.y + shipCover.h);
 }
 
-void Ship::autoAlignShip() {
+void Ship::calculateShipRowCol() {
     int dx = shipCover.x - ownerBoard->getBasePosX;
     int dy = shipCover.y - ownerBoard->getBasePosY;
 
@@ -56,14 +56,12 @@ void Ship::autoAlignShip() {
         if (startCol >= BOARD_COL)
             startCol = BOARD_COL - 1;
     }
-
-    shipCover.x = ownerBoard->getBasePosX() + startCol * cellSpacing;
-    shipCover.y = ownerBoard->getBasePosY() + startRow * cellSpacing;
 }
 
 void Ship::sendToTray() {
     shipCover.x = shipTrayPos.x;
     shipCover.y = shipTrayPos.y;
+    startRow = startCol = -1;
 }
 
 void Ship::updateShip(SDL_Event e) {
@@ -122,4 +120,20 @@ void Ship::updateShip(SDL_Event e) {
 
 void Ship::renderShip() {
     SDL_RenderCopy(shipRenderer, shipTexture, nullptr, &shipCover);
+}
+
+int Ship::getShipWidth() const {
+    return shipWidth;
+}
+
+int Ship::getStartRow() const {
+    return startRow;
+}
+
+int Ship::getStartCol() const {
+    return startCol;
+}
+
+bool Ship::checkHorizontal() const {
+    return horizontal;
 }

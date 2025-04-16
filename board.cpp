@@ -35,11 +35,23 @@ bool Board::checkMouseInBoard(int mouseX, int mouseY) {
             boardCover.y <= mouseY and mouseY <= boardCover.y + boardCover.h);
 }
 
-Board::updateBoard() {
+bool Board::checkValidPlacement(Ship* placingShip) {
+    for (int i = 0; i < placingShip->getShipWidth(); ++i) {
+        int row = placingShip->getStartCol() + (placingShip->checkHorizontal() ? 0 : i);
+        int col = placingShip->getStartRow() + (placingShip->checkHorizontal() ? i : 0);
 
+        for (const pair<const int, int> &p : occupiedCells) {
+            if (p.first == row and p.second == col)
+                return false;
+        }
+    }
+
+    return true;
 }
 
-Board::renderBoard() {
+void Board::updateBoard() {}
+
+void Board::renderBoard() {
     for (auto &row : grid) {
         for (auto &cell : row) {
             SDL_Color FillColor = backgroundColor;

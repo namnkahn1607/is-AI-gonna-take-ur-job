@@ -38,23 +38,28 @@ const int BOARD_COL = 10;
 
 const int CARRIER_WIDTH = 5;
 const int CARRIER_IDX = 0;
-constexpr char* CarrierImgPath = "";
+constexpr char* blueCarrierPath = "assets/img/Bcarrier.png";
+constexpr char* redCarrierPath = "assets/img/Rcarrier.png";
 
 const int BATTLESHIP_WIDTH = 4;
 const int BATTLESHIP_IDX = 1;
-constexpr char* BattleshipImgPath = "";
+constexpr char* blueBattleshipPath = "assets/img/Bbattleship.png";
+constexpr char* redBattleshipPath = "assets/img/Rbattleship.png";
 
 const int CRUISER_WIDTH = 3;
 const int CRUISER_IDX = 2;
-constexpr char* CruiserImgPath = "";
+constexpr char* blueCruiserPath = "assets/img/Bcruiser.png";
+constexpr char* redCruisePath = "assets/img/Rcruiser.png";
 
 const int SUBMARINE_WIDTH = 3;
 const int SUBMARINE_IDX = 3;
-constexpr char* SubmarineImgPath = "";
+constexpr char* blueSubmarinePath = "assets/img/Bsubmarine.png";
+constexpr char* redSubmarinePath = "assets/img/Rsubmarine.png";
 
 const int DESTROYER_WIDTH = 2;
 const int DESTROYER_IDX = 4;
-constexpr char* DestroyerImgPath = "";
+constexpr char* blueDestroyerPath = "assets/img/Bdestroyer.png";
+constexpr char* redDestroyerPath = "assets/img/Rdestroyer.png";
 
 typedef enum EXIT_CODE {
     PROGRAM_SUCCESS

@@ -27,11 +27,19 @@ public:
 
     bool checkMouseInShip(int mouseX, int mouseY);
 
-    void autoAlignShip();
+    void calculateShipRowCol();
 
     void sendToTray();
     
     void updateShip(SDL_Event e);
 
     void renderShip();
+
+    int getShipWidth() const;
+
+    int getStartRow() const;
+
+    int getStartCol() const;
+
+    bool checkHorizontal() const;
 };
