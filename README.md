@@ -1,2 +1,2 @@
-# isAI gonna take ur job
+# is AI gonna take ur job
  
