@@ -55,7 +55,7 @@ void Game::render() {
     SDL_SetRenderDrawColor(
         ren, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a
     );
-    
+
     SDL_RenderClear(ren);
 
     /* stuff to render */
@@ -65,11 +65,12 @@ void Game::render() {
 }
 
 void Game::close() {
-    SDL_DestroyWindow(win);
-    win = nullptr;
     SDL_DestroyRenderer(ren);
     ren = nullptr;
-
+    SDL_DestroyWindow(win);
+    win = nullptr;
+    
+    IMG_Quit();
     SDL_Quit();
 
     printf("%s\n", "closed game!");
