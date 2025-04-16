@@ -17,13 +17,23 @@ private:
     SDL_Renderer* boardRenderer;
 
 public:
+    vector<Ship*> shipList;
+
     Board(SDL_Point basePos, SDL_Renderer* ren, bool turn);
 
     ~Board();
 
+    bool checkMouseInBoard(int mouseX, int mouseY);
+    
     void renderBoard();
 
     void updateBoard();
 
-    bool checkMouseInBoard(int mouseX, int mouseY);
+    int getBasePosX() const;
+
+    int getBasePosY() const;
+
+    int getBoardWidth() const;
+    
+    int getBoardHeight() const;
 };

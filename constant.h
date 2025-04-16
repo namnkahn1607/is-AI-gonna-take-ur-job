@@ -4,6 +4,7 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include "texture.h"
 
 const int FRAME_DELAY = 1000 / 144;
@@ -34,6 +35,26 @@ const int BORDER_SIZE = 3;
 
 const int BOARD_ROW = 10;
 const int BOARD_COL = 10;
+
+const int CARRIER_WIDTH = 5;
+const int CARRIER_IDX = 0;
+constexpr char* CarrierImgPath = "";
+
+const int BATTLESHIP_WIDTH = 4;
+const int BATTLESHIP_IDX = 1;
+constexpr char* BattleshipImgPath = "";
+
+const int CRUISER_WIDTH = 3;
+const int CRUISER_IDX = 2;
+constexpr char* CruiserImgPath = "";
+
+const int SUBMARINE_WIDTH = 3;
+const int SUBMARINE_IDX = 3;
+constexpr char* SubmarineImgPath = "";
+
+const int DESTROYER_WIDTH = 2;
+const int DESTROYER_IDX = 4;
+constexpr char* DestroyerImgPath = "";
 
 typedef enum EXIT_CODE {
     PROGRAM_SUCCESS

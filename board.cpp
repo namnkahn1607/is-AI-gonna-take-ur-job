@@ -30,6 +30,11 @@ Board::Board(SDL_Point basePos, SDL_Renderer* ren, bool turn)
 
 Board::~Board() {}
 
+bool Board::checkMouseInBoard(int mouseX, int mouseY) {
+    return (boardCover.x <= mouseX and mouseX <= boardCover.x + boardCover.w and
+            boardCover.y <= mouseY and mouseY <= boardCover.y + boardCover.h);
+}
+
 Board::updateBoard() {
 
 }
@@ -91,7 +96,18 @@ Board::renderBoard() {
     }
 }
 
-bool Board::checkMouseInBoard(int mouseX, int mouseY) {
-    return (boardCover.x <= mouseX and mouseX <= boardCover.x + boardCover.w and
-            boardCover.y <= mouseY and mouseY <= boardCover.y + boardCover.h);
+int Board::getBasePosX() const {
+    return boardCover.x;
+}
+
+int Board::getBasePosY() const {
+    return boardCover.y;
+}
+
+int Board::getBoardWidth() const {
+    return boardCover.w;
+}
+
+int Board::getBoardHeight() const {
+    return boardCover.h;
 }

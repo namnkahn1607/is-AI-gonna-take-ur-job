@@ -18,18 +18,20 @@ private:
     bool onBoard, horizontal, isDragging;
     int startRow, startCol;
     int offsetX, offsetY;
-    Board shipBoard;
+    Board* ownerBoard;
 
 public:
-    Ship(const char* imgPath, SDL_Renderer* ren, SDL_Point trayPos, int len);
+    Ship(const char* imgPath, SDL_Renderer* ren, SDL_Point trayPos, int len, Board* playBoard);
 
     ~Ship();
 
-    bool checkMouseWithin(int mouseX, int mouseY);
+    bool checkMouseInShip(int mouseX, int mouseY);
 
-    void shipHandleEvents(SDL_Event e);
+    void autoAlignShip();
 
-    void updateShip();
+    void sendToTray();
+    
+    void updateShip(SDL_Event e);
 
     void renderShip();
 };
