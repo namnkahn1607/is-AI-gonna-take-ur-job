@@ -37,8 +37,8 @@ bool Board::checkMouseInBoard(int mouseX, int mouseY) {
 
 bool Board::checkValidPlacement(Ship* placingShip) {
     for (int i = 0; i < placingShip->getShipWidth(); ++i) {
-        int row = placingShip->getStartCol() + (placingShip->checkHorizontal() ? 0 : i);
-        int col = placingShip->getStartRow() + (placingShip->checkHorizontal() ? i : 0);
+        int row = placingShip->getStartRow() + (placingShip->checkHorizontal() ? 0 : i);
+        int col = placingShip->getStartCol() + (placingShip->checkHorizontal() ? i : 0);
 
         for (const pair<const int, int> &p : occupiedCells) {
             if (p.first == row and p.second == col)
@@ -47,6 +47,16 @@ bool Board::checkValidPlacement(Ship* placingShip) {
     }
 
     return true;
+}
+
+void Board::snapShip(Ship* snappingShip) {
+    for (int i = 0; i < snappingShip->getShipWidth(); ++i) {
+        int row = snappingShip->getStartRow() + (snappingShip->checkHorizontal() ? 0 : i);
+        int col = snappingShip->getStartCol() + (snappingShip->checkHorizontal() ? i : 0);
+
+        occupiedCells.push_back({row, col});
+        stateMatrix[row][col] = CELL_OCCUPIED;
+    }
 }
 
 void Board::updateBoard() {}

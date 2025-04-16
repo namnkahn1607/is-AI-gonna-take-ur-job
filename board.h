@@ -29,10 +29,12 @@ public:
     bool checkMouseInBoard(int mouseX, int mouseY);
 
     bool checkValidPlacement(Ship* placingShip);
+
+    void snapShip(Ship* placingShip);
+    
+    void updateBoard();
     
     void renderBoard();
-
-    void updateBoard();
 
     int getBasePosX() const;
 

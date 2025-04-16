@@ -73,9 +73,11 @@ void Ship::updateShip(SDL_Event e) {
                     offsetX = mouseX - shipCover.x;
                     offsetY = mouseY - shipCover.y;
                 }
-            } else if (e.button.button == SDL_BUTTON_RIGHT)
+            } else if (e.button.button == SDL_BUTTON_RIGHT) {
                 horizontal = !horizontal;
-
+                swap(shipCover.w, shipCover.h);
+            }
+                
             break;
         }
 
@@ -97,18 +99,25 @@ void Ship::updateShip(SDL_Event e) {
             if (e.button.button == SDL_BUTTON_LEFT) {
                 isDragging = false;
 
-                // if (ownerBoard->checkMouseInBoard(e.button.x, e.button.y))
-                //     autoAlignShip();
-                // else
-                //     sendToTray();
+                if (ownerBoard->checkMouseInBoard(e.button.x, e.button.y)) {
+                    calculateShipRowCol();
+                    
+                    if (ownerBoard->checkValidPlacement(this))
+                        ownerBoard->snapShip(this);
+                    else
+                        sendToTray();
+                } else
+                    sendToTray();
             }
 
             break;
         }
 
         case SDL_KEYDOWN: {
-            if (e.key.keysym.sym == SDLK_SPACE)
+            if (e.key.keysym.sym == SDLK_SPACE) {
                 horizontal = !horizontal;
+                swap(shipCover.w, shipCover.h);
+            }
 
             break; 
         }
