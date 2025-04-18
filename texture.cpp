@@ -1,7 +1,5 @@
 #include "texture.h"
 
-using namespace std;
-
 SDL_Texture* textureManager::loadFromFile(const char* imgPath, SDL_Renderer* ren) {
     SDL_Surface* loadedSur = IMG_Load(imgPath);
     

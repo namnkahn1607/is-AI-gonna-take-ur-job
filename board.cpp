@@ -2,8 +2,6 @@
 #include "ship.h"
 #include "cell.h"
 
-using namespace std;
-
 Board::Board(SDL_Point basePos, SDL_Renderer* ren, bool turn) 
     : boardRenderer(ren), playerOrBot(turn), isHidden(false) {
         boardCover = {
@@ -13,7 +11,7 @@ Board::Board(SDL_Point basePos, SDL_Renderer* ren, bool turn)
         };
 
         for (int i = 0; i < BOARD_ROW; ++i) {
-            vector<Cell> row;
+            std::vector<Cell> row;
 
             for (int j = 0; j < BOARD_COL; ++j) {
                 SDL_Point curCellPos = {
@@ -25,8 +23,8 @@ Board::Board(SDL_Point basePos, SDL_Renderer* ren, bool turn)
             }
         }
 
-        stateMatrix = vector<vector<State>>(
-            BOARD_ROW, vector<State>(BOARD_COL, CELL_ALIVE)
+        stateMatrix = std::vector<std::vector<State>>(
+            BOARD_ROW, std::vector<State>(BOARD_COL, CELL_ALIVE)
         );
     }
 
@@ -42,7 +40,7 @@ bool Board::checkValidPlacement(Ship* placingShip) {
         int row = placingShip->getStartRow() + (placingShip->checkHorizontal() ? 0 : i);
         int col = placingShip->getStartCol() + (placingShip->checkHorizontal() ? i : 0);
 
-        for (const pair<const int, int> &p : occupiedCells) {
+        for (const std::pair<const int, int> &p : occupiedCells) {
             if (p.first == row and p.second == col)
                 return false;
         }

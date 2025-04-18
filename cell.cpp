@@ -1,7 +1,5 @@
 #include "cell.h"
 
-using namespace std;
-
 Cell::Cell(SDL_Point basePos, SDL_Renderer* ren) : cellState(CELL_ALIVE), cellRenderer(ren) {
     cellCover = {
         basePos.x, basePos.y,

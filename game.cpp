@@ -1,7 +1,5 @@
 #include "game.h"
 
-using namespace std;
-
 TTF_Font* inGameFont = nullptr;
 
 Board* playerBoard = nullptr;

@@ -1,7 +1,5 @@
 #include "game.h"
 
-using namespace std;
-
 Game* newGame = nullptr;
 
 int main(int argc, char* argv[]) {

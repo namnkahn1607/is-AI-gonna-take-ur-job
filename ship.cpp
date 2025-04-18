@@ -2,8 +2,6 @@
 #include "board.h"
 #include "texture.h"
 
-using namespace std;
-
 Ship::Ship(const char* imgPath, SDL_Renderer* ren, SDL_Point trayPos, int len, Board* playBoard)
     : shipTrayPos(trayPos), shipWidth(len), shipRenderer(ren),
     onBoard(false), horizontal(true), isDragging(false),
@@ -83,7 +81,7 @@ void Ship::updateShip(SDL_Event e) {
                     ownerBoard->removeShip(this);
                     
                     horizontal = !horizontal;
-                    swap(shipCover.w, shipCover.h);
+                    std::swap(shipCover.w, shipCover.h);
                     
                     calculateShipRowCol();
                     
@@ -132,7 +130,7 @@ void Ship::updateShip(SDL_Event e) {
         case SDL_KEYDOWN: {
             if (e.key.keysym.sym == SDLK_SPACE) {
                 horizontal = !horizontal;
-                swap(shipCover.w, shipCover.h);
+                std::swap(shipCover.w, shipCover.h);
             }
 
             break; 
