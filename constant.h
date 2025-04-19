@@ -26,6 +26,8 @@ const bool NOT_FULLSCREEN = false;
 constexpr const char* fontPath = "assets/font/Consolas.ttf";
 const int inGameFontSize = 14;
 
+const SDL_Color buttonIdleColor = {0, 122, 204, 255};
+const SDL_Color buttonHoverColor = {10, 173, 255, 255};
 const SDL_Color playerDomainColor = {194, 232, 255, 255};
 const SDL_Color playerSignatureColor = {10, 173, 255, 255};
 const SDL_Color botDomainColor = {249, 176, 202, 255};

@@ -1,4 +1,7 @@
 #include "game.h"
+#include "color_button.h"
+#include "texture_button.h"
+#include "board.h"
 
 TTF_Font* inGameFont = nullptr;
 

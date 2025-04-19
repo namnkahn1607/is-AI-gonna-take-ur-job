@@ -1,6 +1,6 @@
 #pragma once
 
-#include "game.h"
+#include "constant.h"
 
 using namespace std;
 
