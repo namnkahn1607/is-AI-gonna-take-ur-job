@@ -3,6 +3,7 @@
 #include "texture_button.h"
 #include "board.h"
 
+SDL_Renderer* Game::gameRenderer = nullptr;
 TTF_Font* inGameFont = nullptr;
 
 Board* playerBoard = nullptr;

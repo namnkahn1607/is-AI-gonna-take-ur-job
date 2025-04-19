@@ -9,6 +9,8 @@ private:
     SDL_Renderer* ren;
 
 public:
+    static SDL_Renderer* gameRenderer;
+
     Game();
     
     ~Game();
